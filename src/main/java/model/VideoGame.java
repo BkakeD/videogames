@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,16 +19,15 @@ public class VideoGame {
 	@GeneratedValue
 	@Column(name="ID")
 	private int id;
-	@Column(name="NAME")
 	private String name;
-	@Column(name="DEVELOPER")
-	private String developer;
-	@Column(name="PUBLISHER")
-	private String publisher;
+	@ManyToOne
+	private Developer developer;
+	@ManyToOne
+	private Publisher publisher;
 	
 	public VideoGame() {}
 	
-	public VideoGame(String name, String developer, String publisher) {
+	public VideoGame(String name, Developer developer, Publisher publisher) {
 		this.name = name;
 		this.developer = developer;
 		this.publisher = publisher;
@@ -49,23 +49,24 @@ public class VideoGame {
 		this.name = name;
 	}
 	
-	public String getDeveloper() {
+	public Developer getDeveloper() {
 		return developer;
 	}
 	
-	public void setDeveloper(String developer) {
+	public void setDeveloper(Developer developer) {
 		this.developer = developer;
 	}
 	
-	public String getPublisher() {
+	public Publisher getPublisher() {
 		return publisher;
 	}
 	
-	public void setPublisher(String publisher) {
+	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
 	
-	public String returnGameDetails() {
+	@Override
+	public String toString() {
 		return this.name + ", made by: " + this.developer + ", published by: " + this.publisher;
 	}
 	
